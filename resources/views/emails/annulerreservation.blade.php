@@ -1,0 +1,1 @@
+Bonjour, le point de vente {{ $contact_data['nom'] }} {{ $contact_data['prenoms'] }} vient d'annuler la réservation N°{{ $contact_data['facture'] }} du client {{ $contact_data['client_nom'] }} {{ $contact_data['client_prenoms'] }} pour le modif de "{{ $contact_data['demande'] }}"

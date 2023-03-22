@@ -1,0 +1,22 @@
+#mytab .nav-tabs > a {
+  border-radius: 0;
+  border: 0;
+  font-weight: bold;
+}
+
+#mytab .nav-tabs > a:hover {
+  background-color: #1da1f2;
+  color: #fff;
+}
+
+#mytab .active {
+  border-radius: 0;
+  background-color: #1da1f2;
+  color: #fff;
+}
+
+#mytab .tab-pane {
+  color: #000;
+  background-color: #faf9fc;
+  padding: 15px;
+}

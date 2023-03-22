@@ -1,0 +1,415 @@
+.setting-button {
+  background: #42C2FF; }
+
+/*====================================
+=            Section home            =
+====================================*/
+/*----------  Subsection global button  ----------*/
+.button-theme {
+  background: #42C2FF;
+  border: 1px solid #42C2FF;
+  color: #fff; }
+  .button-theme:hover {
+    background: black;
+    border: 1px solid #671a6b;
+    color: #fff; }
+
+.border-button-theme {
+  color: #42C2FF;
+  border: 2px solid #42C2FF; }
+
+/*----------  Subsection top header  ----------*/
+.top-header {
+  background-color: #42C2FF; }
+
+.top-header .wrap-top-information ul li a .box-button:hover {
+  color: #42C2FF; }
+
+/*----------  Subsection Navbar  ----------*/
+nav.navbar.bootsnav ul.nav li.active > a {
+  color: #42C2FF; }
+
+nav.navbar li.dropdown ul.dropdown-menu, ul.top-link li .dropdown-menu {
+  border-top-color: #42C2FF !important; }
+
+nav.navbar ul.nav > li > a:hover {
+  color: #42C2FF; }
+
+/*----------  Subsection slider dots active  ----------*/
+.home_slides .carousel.slide .carousel-indicators li.active {
+  background: #42C2FF; }
+
+/*----------  Subsection find the property looking for  ----------*/
+.wrap-catagory .title-head .c-bg-yellow, .wrap-form-property .title-head .c-bg-yellow {
+  background-color: #42C2FF !important; }
+
+.wrap-catagory .title-head .c-bg-after-yellow:after, .wrap-form-property .title-head .c-bg-after-yellow:after {
+  background-color: #42C2FF !important; }
+
+.wrap-catagory .catagory-locations:hover .locations-overlay, .wrap-form-property .catagory-locations:hover .locations-overlay {
+  background-color: rgba(133, 35, 138, 0.81); }
+
+/*----------  Subsection form filter home  ----------*/
+.form-control:focus {
+  border-color: #42C2FF; }
+
+/* choosen */
+.chosen-container .chosen-drop {
+  border-left: 1px solid #42C2FF;
+  border-right: 1px solid #42C2FF;
+  border-bottom: 1px solid #42C2FF; }
+
+.chosen-container-active .chosen-single {
+  border: 1px solid #42C2FF; }
+
+.chosen-container-active.chosen-with-drop .chosen-single {
+  border: 1px solid #42C2FF; }
+
+.chosen-container .chosen-results li.highlighted {
+  background-color: #42C2FF;
+  background-image: linear-gradient(#42C2FF 20%, #42C2FF 90%);
+  color: #fff; }
+
+.nstSlider .bar {
+  background: #42C2FF; }
+
+.nstSlider .highlightPanel {
+  background: #42C2FF; }
+
+/*----------  Subsection features  ----------*/
+.wrap-features .right-redbox {
+  background-color: #42C2FF; }
+
+.wrap-features .right-redbox {
+  background-color: rgba(133, 35, 138, 0.81); }
+
+/*----------  Subsection popular property  ----------*/
+.wrap-popular-property .card .card-image .ribbon {
+  background-color: #42C2FF; }
+
+.wrap-listing-item .card .card-content .listingInfo .vcard .title-properti h4:hover, .slider-popular-property .card .card-content .listingInfo .vcard .title-properti h4:hover {
+  color: #42C2FF; }
+
+.wrap-listing-item .card .card-image .ribbon, .slider-popular-property .card .card-image .ribbon {
+  background-color: #42C2FF; }
+
+.wrap-popular-property .slider-popular-property .owl-nav div {
+  background: #42C2FF; }
+
+.wrap-popular-property .slider-popular-property .owl-nav div:hover {
+  border: 2px solid #42C2FF; }
+
+.property-block-list .ribbon {
+  background-color: #42C2FF; }
+
+.content-block h4:hover {
+  color: #42C2FF; }
+
+/*----------  Subsection properties listing  ----------*/
+.property-listing-block .card .card-image .ribbon {
+  background-color: #42C2FF; }
+
+.property-listing-block .card .card-content .listingInfo .vcard .title-properti h4:hover {
+  color: #42C2FF; }
+
+.property-listing-list .ribbon {
+  background-color: #42C2FF; }
+
+/*----------  Subsection Nav slider property  ----------*/
+.nav-slider-property .owl-nav div {
+  background: #42C2FF; }
+
+.nav-slider-property .owl-nav div:hover {
+  border: 2px solid #42C2FF;
+  color: #42C2FF; }
+
+/*----------  Subsection owl dots  ----------*/
+.wrap-features-bestproperties .owl-dot.active span {
+  background: #42C2FF; }
+
+/*----------  Subsection wrap sidebar panel search property ----------*/
+.property-title span {
+  color: #42C2FF; }
+
+.wrap-sidebar-property .panel-default > .panel-heading h4 span {
+  color: #42C2FF; }
+
+/*----------  Subsection pagging  ----------*/
+.pagination a.active {
+  background-color: #42C2FF;
+  color: #fff;
+  border: 1px solid #42C2FF; }
+
+/*----------  Subsection property detail  ----------*/
+section .all .slider-two .item.active {
+  border: solid 3px #42C2FF; }
+
+/*----------  Subsection about us  ----------*/
+.about-us .profile h3:after {
+  background: #42C2FF; }
+
+/*----------  Subsection sign-up  ----------*/
+.wrap-register-bg {
+  background: #42C2FF; }
+
+/*----------  Subsection member dashboard  ----------*/
+.noempaty {
+  color: #42C2FF; }
+
+.account-info {
+  border-bottom: 5px solid #42C2FF; }
+
+.account-info-type {
+  background: #42C2FF; }
+
+.wrap-content-dashboard .panel-footer {
+  background-color: #42C2FF; }
+
+.bg-table thead tr th {
+  background-color: #42C2FF; }
+
+.wrap-sidebar-dashboard .list-group .list-group-item {
+  background-color: #42C2FF;
+  border: 1px solid white; }
+
+.wrap-sidebar-dashboard .list-group a:hover {
+  background-color: #000; }
+
+.inputfile-default:focus + label, .inputfile-default.has-focus + label, .inputfile-default + label:hover {
+  background-color: #42C2FF; }
+
+/*----------  Subsection agent profile  ----------*/
+.wrap-agent-profile-detail .agent-profile .agent-profile-catagory {
+  color: #42C2FF; }
+
+.wrap-agent-profile-detail-two .agent-profile .agent-profile-catagory {
+  color: #42C2FF; }
+
+/*----------  Subsection Article & Tips  ----------*/
+article .over-layer, .post .over-layer {
+  background-color: rgba(133, 35, 138, 0.81); }
+
+.wrapblog-slide .owl-dot.active span {
+  background: #42C2FF; }
+
+/*----------  Subsection FAQ  ----------*/
+.panel-group .panel .panel-heading .panel-title a:after {
+  background-color: #42C2FF; }
+
+/*----------  Subsection sidebar blog  ----------*/
+.sidebar-blog > .title h3:after {
+  background: #42C2FF; }
+
+.sidebar-list-blog .item .item_content .meta_category {
+  background: #42C2FF; }
+
+.sidebar-list-blog .item .item_content .meta_category:after {
+  border-color: rgba(136, 183, 213, 0);
+  border-right-color: #42C2FF; }
+
+.sidebar-list-blog .item .item_thumb {
+  background-color: #42C2FF; }
+
+.sidebar-list-blog .item .item_content h4 a:hover {
+  color: #42C2FF; }
+
+.sidebar-blog ul li a:before {
+  color: #42C2FF; }
+
+.sidebar-blog ul li a:hover {
+  color: #42C2FF; }
+
+.post-footer ul li span {
+  color: #42C2FF; }
+
+.tag a {
+  border: 1px solid #42C2FF;
+  color: #42C2FF; }
+
+.tag a:hover {
+  background: #42C2FF; }
+
+.blog-nav-tags a {
+  background: #42C2FF;
+  border: 1px solid #42C2FF; }
+
+.blog-nav-tags a:hover {
+  color: #42C2FF;
+  background: #fff;
+  border: 1px solid #42C2FF; }
+
+.back-article > a:hover {
+  background-color: #42C2FF; }
+
+.prev-article > h3 {
+  color: #42C2FF; }
+
+.next-article > h3 {
+  color: #42C2FF; }
+
+.wrap-articleterkait .post-content h4 a:hover {
+  color: #42C2FF; }
+
+.wrap-articleterkait .item .item_thumb {
+  background-color: #42C2FF; }
+
+.wrap-comment .reply {
+  background: #42C2FF; }
+
+/*----------  Subsection blog  ----------*/
+.post-thumbnail .post-item .post-content-details .post-title h3 a:hover {
+  color: #42C2FF; }
+
+.post-thumbnail .post-item .post-image {
+  background-color: rgba(133, 35, 138, 0.81); }
+
+.post-thumbnail .post-item .post-content-details .post-info .post-autor a:hover {
+  color: #42C2FF; }
+
+.post-thumbnail .post-item .post-content-details .post-info .post-category a:hover {
+  color: #42C2FF; }
+
+.post-thumbnail .post-item .post-content-details .post-meta .post-comments a:hover {
+  color: #42C2FF; }
+
+.post-thumbnail .post-item .post-content-details .post-meta .post-share a:hover {
+  color: #42C2FF; }
+
+/*----------  Subsection Gallery  ----------*/
+.btn14 .buttons .fa {
+  background: #42C2FF; }
+
+.gallery .portfolio-sorting li a:hover, .gallery .portfolio-sorting li a:focus, .gallery .portfolio-sorting li a.active {
+  background-color: #42C2FF; }
+
+/*----------  Subsection contact us map  ----------*/
+.map {
+  background: #42C2FF; }
+
+/*----------  Subsection recent property  ----------*/
+.wrap-recent-property .owl-nav div {
+  background: #42C2FF; }
+  .wrap-recent-property .owl-nav div:hover {
+    color: #42C2FF; }
+
+.listing-hidden-content {
+  background-color: #42C2FF; }
+
+.listing-badges .featured {
+  background-color: #42C2FF; }
+
+/*----------  Subsection agent  ----------*/
+.wrap-agent-home .agent-profile .agent-profile-catagory {
+  color: #42C2FF; }
+
+.wrap-agent-home .text-agent h2:before {
+  background-color: #42C2FF; }
+
+/*----------  Subsection article & tips  ----------*/
+article .post-title a:hover, .post .post-title a:hover {
+  color: #42C2FF; }
+
+article .over-layer ul.post-link li a:hover, .post .over-layer ul.post-link li a:hover {
+  color: #42C2FF; }
+
+article .read-more:hover, .post .read-more:hover {
+  color: #42C2FF; }
+
+article .read-more:after, .post .read-more:after {
+  border: 1px solid #42C2FF; }
+
+/*----------  Subsection testimonial  ----------*/
+.client-dsc h2 {
+  color: #42C2FF; }
+
+.testimonial-section .left i, .testimonial-section .right i {
+  background: #42C2FF; }
+
+/*----------  Subsection call-to-action  ----------*/
+.bg-theme {
+  background-color: #42C2FF; }
+
+.wrap-count {
+  background: #42C2FF; }
+
+.call-to-actions .call-us .booking {
+  color: #42C2FF; }
+
+/*=====  End of Section home  ======*/
+/*============================================
+=            Section home style 2            =
+============================================*/
+.wrap-search-bar-hero .panel-default .panel-heading {
+  background-color: #42C2FF; }
+
+.wrap-features-properties ul.list-features li:before {
+  background: #42C2FF; }
+
+.icon-box.color .icon i {
+  background: #42C2FF; }
+
+.icon-box.color .icon i:after {
+  box-shadow: 0 0 0 3px #42C2FF; }
+
+/*----------  Subsection agent  ----------*/
+.flat-team.style4:hover .content {
+  background-color: #42C2FF; }
+
+.flat-team.style4 .panel-body .profile-team p {
+  color: #42C2FF; }
+
+.flat-team.style4 .panel-footer .soscial-media li a:hover {
+  background: #42C2FF; }
+
+/*----------  Subsection testimonial two  ----------*/
+.testimonial-section-two .slider-testimonial-two .testimonial-block-panel .testimonial-panel-heading:before {
+  color: #42C2FF; }
+
+/*----------  Subsection owl dots  ----------*/
+.testimonial-section-two .owl-dot.active span {
+  background: #42C2FF; }
+
+/*----------  Subsection client our customers  ----------*/
+.clients .owl-nav div {
+  background: #42C2FF; }
+
+.clients .owl-nav div:hover {
+  border: 2px solid #42C2FF;
+  color: #42C2FF; }
+
+.text-white {
+  color: #fff; }
+
+.text-theme {
+  color: #42C2FF; }
+
+/*=====  End of Section home style 2  ======*/
+/*============================================
+=            Section home style 3            =
+============================================*/
+.parallax .content-parallax h2 span {
+  color: #42C2FF; }
+
+.parallax .title-head h3 span {
+  color: #42C2FF; }
+
+/*=====  End of Section home style 3  ======*/
+/*============================================
+=            Section footer            =
+============================================*/
+.footer-one .copyright {
+  color: #42C2FF; }
+
+.footer-two a.copyright {
+  color: #42C2FF; }
+
+.button-reservation{
+  background-color: #42C2FF !important;
+  border-color: #42C2FF !important;
+}
+
+.button-reservation:hover{
+  background-color: #FAF000 !important;
+  border-color: #FAF000 !important;
+  color: #000;
+}

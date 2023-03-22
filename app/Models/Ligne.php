@@ -28,4 +28,6 @@ class Ligne extends Model
         return $this->belongsTo(Compagnie::class, 'compagnie_id');
     }
 
+    
+
 }

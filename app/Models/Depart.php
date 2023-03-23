@@ -49,4 +49,17 @@ class Depart extends Model
         return $this->belongsTo(Timbre::class, 'timbre_id');
     }
 
+	public static function custom()
+	{
+		$data = Ligne::with(['getUser' => function ($q) {
+					$q->select('users.*', 'trainer_details.default_acc_name', 'trainer_details.default_bank_id',
+					'trainer_details.default_acc_number');
+					$q->join('trainer_details', 'users.id', '=', 'trainer_details.user_id');
+				}])
+				->get()
+				->toArray();      
+				
+	   return $data;
+	}
+		
 }

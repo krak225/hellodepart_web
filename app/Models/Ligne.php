@@ -28,6 +28,12 @@ class Ligne extends Model
         return $this->belongsTo(Compagnie::class, 'compagnie_id');
     }
 
+	//le tarif en cours
+    public function tarif()
+    {
+        return $this->hasOne(Tarif::class, 'ligne_id')->where('tarif_statut','=', 'VALIDE');
+    }
+
     
 
 }

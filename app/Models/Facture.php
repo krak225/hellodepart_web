@@ -26,4 +26,21 @@ class Facture extends Model
 		return $this->hasMany(Reservation::class, 'reservation_id','reservation_id');
 	
 	}
+	
+	
+    public function client()
+    {
+        return $this->belongsTo(Client::class, 'client_id');
+    }
+
+    public function depart()
+    {
+        return $this->belongsTo(Depart::class, 'depart_id');
+    }
+	
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+	
 }

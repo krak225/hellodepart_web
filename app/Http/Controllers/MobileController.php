@@ -18,6 +18,7 @@ use App\Models\Commande;
 use App\Models\ProduitCommande;
 use App\Models\Reservation;
 use Stdfn;
+use DB;
 
 class MobileController extends Controller
 {
@@ -241,21 +242,95 @@ class MobileController extends Controller
     {
 		$user_id = 1;//auth('api')->user()->id;
 		$depart_id = $request->depart_id;
-
-		$facture = new Facture();
-		$facture->user_id = $user_id;
-		$facture->depart_id = $depart_id;
-		$facture->facture_nomprenomspassager = $request->passager;
-		$facture->facture_nbr_ticket = $request->nombre_ticket;
-		$facture->facture_montant = 1000 * $request->nombre_ticket;
-		$facture->facture_partpdv = 100 ;
-		$facture->facture_montant_total = 1000 * $request->nombre_ticket + $facture->facture_partpdv;
-		$facture->facture_date_creation = gmdate('Y-m-d H:i:s');
-		$facture->facture_statut_paiement = 'BROUILLON';
-		$facture->save();
+		$depart = Depart::find($depart_id);
+		$tarif_unitaire = $depart->depart_tarif;
+		$nbre_ticket = $request->nombre_ticket;
+		$telephone = $request->telephone;
 		
-		return ['status'=>1, 'message'=>'PAIEMENT OK', 'facture'=>$facture];
+		if($depart->depart_capacitevehicule >= $nbre_ticket){
+			
+			if (Client::where('client_telephone', $telephone)->exists()) {
+		
+				$client = Client::where(['client_telephone'=>$telephone])->first();
+			
+			}else{
+			
+				$client = new Client();
+							
+				$nomComplet = $request->client;				
+				$posEspace = strpos($nomComplet, ' ');
+				$nom = substr($nomComplet, 0, $posEspace);
+				$prenoms = substr($nomComplet, $posEspace + 1);
 
+				$client->depart_id            = $request->depart_id;
+				$client->client_nom           = $nom;
+				$client->client_prenoms       = $prenoms;
+				$client->client_email         = htmlspecialchars($request->email);
+				// $client->client_datedepart    = htmlspecialchars($request->date_depart);
+				$client->client_telephone     = htmlspecialchars($request->telephone);
+				// $client->client_heuredepart   = htmlspecialchars($request->heure_depart);
+				// $client->client_prixunitaire  = $depart->depart_tarif;
+				// $client->client_nbreplace     = htmlspecialchars($request->nombre_place);
+				$client->client_code          = gmdate('Ymd').rand(111111,999999);
+				$client->client_ip            = $_SERVER['REMOTE_ADDR'];
+				$client->save();
+
+			}
+
+			//Récupérer les paramètrages des frais.
+			$paramsfrais = DB::table('paramfrais')
+							// ->where('paramfrais_datedebeffet', '<=', $depart->depart_date_prevue)
+							// ->where('paramfrais_datefineffet', '>=', $depart->depart_date_prevue)
+							->first();
+			
+			if(!empty($paramsfrais)){
+				
+				//Renseignement de la table facture
+				$facture = new Facture();
+
+				$facture->client_id               	 = $client->client_id;
+				$facture->user_id                 	 = $user_id;
+				$facture->depart_id               	 = $depart->depart_id;
+				$facture->facture_nbr_ticket      	 = $nbre_ticket;
+				$facture->facture_origine 		  	 = "PDV";
+				$facture->facture_nomprenomspassager = $client->client_nom.' '.$client->client_prenoms;
+				$facture->facture_mobilepassager     = $client->client_telephone;
+				$facture->facture_numero          	 = gmdate('Ymd').rand(11111,99999);
+				$facture->facture_frais 		  	 = ($depart->depart_frais * $nbre_ticket); 
+				$facture->facture_timbre_etat 	  	 = $depart->depart_timbre_etat; 
+				$facture->facture_commission 	  	 = ($depart->depart_commission * $nbre_ticket); 
+				$facture->facture_montant         	 = ($depart->depart_tarif * $nbre_ticket) + $depart->depart_timbre_etat;
+				$facture->facture_montant_total   	 = $facture->facture_frais + $facture->facture_montant;
+				$facture->facture_parttelco_in 	  	 = $facture->facture_montant_total * $paramsfrais->paramfrais_tauxtelco_in_wave;
+				$facture->facture_statut_paiement 	 = "IMPAYE";
+				$facture->facture_total_apayer    	 = $facture->facture_montant_total + $facture->facture_parttelco_in;
+				$facture->facture_compte_compagnie	 = $facture->facture_montant - $facture->facture_commission;
+				$facture->facture_parttelco_out1  	 = $facture->facture_compte_compagnie * $paramsfrais->paramfrais_tauxtelco_out1_wave;
+				$facture->facture_partpdv 		  	 = $facture->facture_total_apayer * $paramsfrais->paramfrais_tauxpdv;
+				$facture->facture_parttelco_out2  	 = $facture->facture_partpdv * $paramsfrais->paramfrais_tauxtelco_out2_wave;
+				$facture->facture_total_tiers_out  	 = $facture->facture_compte_compagnie + $facture->facture_parttelco_out1 + $facture->facture_partpdv + $facture->facture_parttelco_out2;
+				$facture->facture_part_hellodepart 	 = $facture->facture_montant_total - $facture->facture_total_tiers_out;
+				$facture->facture_date_creation   	 = gmdate('Y-m-d');
+				$facture->save();
+
+				$facture_id = $facture->facture_id;
+				
+				$facture = Facture::find($facture_id);
+			
+				return ['statut'=>1, 'message'=>'PAIEMENT OK', 'facture'=>$facture];
+			
+			}else{
+				
+				return ['statut'=>2, 'message'=>'PAS DE FRAIS PARAMETRE'];
+				
+			}
+		
+		}else{
+			
+			return ['status'=>0, 'message'=>'ERREUR LORS DU TRAITEMENT'];
+			
+		}
+		
 	}
 
 	//

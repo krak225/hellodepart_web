@@ -29,33 +29,27 @@ class MobileController extends Controller
 
 
 	//
-	public function rechercher_departs(Request $request){
-
+	public function rechercher_departs($ville_depart = null, $ville_destination = null, $date_depart = null){
+		
+		// die(json_encode(array($ville_depart, $ville_destination, $date_depart)));
         // $user = auth('api')->user();
 		// if($user->profil_id == 3) {
 
-	        $ville_depart = $request->v;
-			$ville_destination = $request->d;
-			$date_depart = $request->dt;
 			$heure_depart = date('Y-m-d H:i:s');
 			
 			//charger les données des tables dans les autres modèles
-			$query_builder = Depart::with(['ligne.tarif','compagnie','gare','vehicule','timbre'])->where('voydepart.depart_capacitevehicule', '>', 0);
+			// $query_builder = Depart::with(['ligne.tarif','compagnie','gare','vehicule','timbre'])->where('voydepart.depart_capacitevehicule', '>', 0);
 			
-			$query_builder = Depart::with(['ligne','compagnie','gare','vehicule'])->where('voydepart.depart_capacitevehicule', '>', 0);
+			$query_builder = Depart::join('voyligne','voyligne.ligne_id','voydepart.ligne_id')
+									->with(['ligne','compagnie','gare','vehicule'])
+									->where('voydepart.depart_capacitevehicule', '>', 0);
 
             if (!empty($ville_depart)) {
-
-               // $query_builder->whereHas('ligne', function ($query) use ($ville_depart) {
-                 //                   $query->where('voyligne.ville_id01', '=', $ville_depart);
-                    //            });
+               $query_builder->where('voyligne.ville_id01', '=', $ville_depart);
             }
 
-            if (!empty($ville_depart)) {
-
-                //$query_builder->whereHas('ligne', function ($query) use ($ville_destination) {
-                                 //   $query->where('voyligne.ville_id02', '=', $ville_destination);
-                                //});
+            if (!empty($ville_destination)) {
+                $query_builder->where('voyligne.ville_id02', '=', $ville_destination);
             }
 
             if (!empty($date_depart)) {
@@ -348,7 +342,7 @@ class MobileController extends Controller
 	public function factures(Request $request)
     {
 
-		$factures = Facture::with(['client','user','depart'])->orderBy('facture_id')->get();
+		$factures = Facture::with(['client','user','depart'])->where(['facture_statut_paiement'=>'PAYE'])->orderBy('facture_id')->get();
 
 		return $factures;
 

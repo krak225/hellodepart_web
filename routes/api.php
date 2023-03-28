@@ -22,18 +22,6 @@ Route::post('login', [MobileController::class,'login']);
 Route::get('unauthorize', [MobileController::class,'unauthorize'])->name('401');
 
 
-Route::get('compagnies', [MobileController::class,'compagnies']);
-Route::get('villes', [MobileController::class,'villes']);
-Route::get('gares', [MobileController::class,'gares']);
-
-Route::get('rechercher_departs/{v?}/{d?}/{dt?}', [MobileController::class,'rechercher_departs']);
-
-Route::post('payerticket', [MobileController::class,'payerticket']);
-
-Route::get('factures', [MobileController::class,'factures']);
-Route::get('clients', [MobileController::class,'clients']);
-
-
 Route::group(['middleware' => 'auth:api'], function () {
 
     Route::get('logout', [MobileController::class,'logout']);
@@ -42,6 +30,18 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('update_profile', [MobileController::class,'update_profile']);
 
     //hello départ
+
+
+	Route::get('compagnies', [MobileController::class,'compagnies']);
+	Route::get('villes', [MobileController::class,'villes']);
+	Route::get('gares', [MobileController::class,'gares']);
+
+	Route::get('rechercher_departs/{v?}/{d?}/{dt?}', [MobileController::class,'rechercher_departs']);
+
+	Route::post('payerticket', [MobileController::class,'payerticket']);
+
+	Route::get('factures', [MobileController::class,'factures']);
+	Route::get('clients', [MobileController::class,'clients']);
 
 
 });

@@ -17,6 +17,7 @@ use App\Models\Client;
 use App\Models\Commande;
 use App\Models\ProduitCommande;
 use App\Models\Reservation;
+use App\Models\CheckoutSession;
 use Stdfn;
 use DB;
 
@@ -234,7 +235,7 @@ class MobileController extends Controller
 
     public function payerticket(Request $request)
     {
-		$user_id = 1;//auth('api')->user()->id;
+		$user_id = auth('api')->user()->id;
 		$depart_id = $request->depart_id;
 		$depart = Depart::find($depart_id);
 		$tarif_unitaire = $depart->depart_tarif;
@@ -310,8 +311,30 @@ class MobileController extends Controller
 				$facture_id = $facture->facture_id;
 				
 				$facture = Facture::find($facture_id);
-			
-				return ['statut'=>1, 'message'=>'PAIEMENT OK', 'facture'=>$facture];
+				
+				//générer un uiid à renvoyer à l'appli mobile
+				$transaction_id = Stdfn::guidv4();
+				
+				//Save checkout data
+				$checkout_session 					 				= new CheckoutSession();
+				$checkout_session->transaction_id 					= $transaction_id;
+				$checkout_session->api_response_id 					= "";
+				$checkout_session->checkout_session_nom_operateur 	= 'CINETPAY MOBILE';
+				$checkout_session->user_id 							= $user_id;
+				$checkout_session->facture_id 						= $facture_id;
+				$checkout_session->client_id             			= $client->client_id;//optional
+				$checkout_session->depart_id 						= $depart->depart_id;//optional
+				$checkout_session->payment_token 					= "from_mobile";
+				$checkout_session->payment_url 						= "from_mobile";
+				$checkout_session->amount 							= $facture->facture_montant_total;
+				$checkout_session->curl_status_code 				= "";
+				$checkout_session->payment_status 					= "";
+				$checkout_session->checkout_session_date_creation 	= gmdate('Y-m-d H:i:s');
+				
+				$checkout_session->save();
+				
+				
+				return ['statut'=>1, 'message'=>'FACTURE ENREGISTREE, REDIRECTION VERS PAIEMENT', 'facture'=>$facture, 'checkout_session'=>$checkout_session];
 			
 			}else{
 				
@@ -345,6 +368,16 @@ class MobileController extends Controller
 		$factures = Facture::with(['client','user','depart'])->where(['facture_statut_paiement'=>'PAYE'])->orderBy('facture_id')->get();
 
 		return $factures;
+
+	}
+
+	//
+	public function villes()
+    {
+
+		$villes = Ville::select('ville_id','ville_libelle','ville_statut')->orderBy('ville_libelle')->get();
+
+		return $villes;
 
 	}
 

@@ -214,13 +214,8 @@ class MobileController extends Controller
     {
         return response()->json([
             'access_token'=>$token,
+            'token_type'=>'Bearer',
             'user'=>$user,
-            'id'=>$user->id."",
-            'firstname'=>$user->prenoms,
-            'lastname'=>$user->name,
-            'email'=>$user->email,
-            'adresse'=>$user->adresse,
-            'token_type'=>'Bearer'
         ]);
     }
 

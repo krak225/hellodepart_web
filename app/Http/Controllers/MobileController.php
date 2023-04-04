@@ -235,7 +235,10 @@ class MobileController extends Controller
 		$depart = Depart::find($depart_id);
 		$tarif_unitaire = $depart->depart_tarif;
 		$nbre_ticket = $request->nombre_ticket;
+		$nbre_ticket = $request->nbre_ticket;
 		$telephone = $request->telephone;
+		
+		// $nbre_ticket = 1;
 		
 		if($depart->depart_capacitevehicule >= $nbre_ticket){
 			
@@ -277,7 +280,6 @@ class MobileController extends Controller
 				
 				//Renseignement de la table facture
 				$facture = new Facture();
-
 				$facture->client_id               	 = $client->client_id;
 				$facture->user_id                 	 = $user_id;
 				$facture->depart_id               	 = $depart->depart_id;
@@ -287,21 +289,24 @@ class MobileController extends Controller
 				$facture->facture_mobilepassager     = $client->client_telephone;
 				$facture->facture_numero          	 = gmdate('Ymd').rand(11111,99999);
 				$facture->facture_frais 		  	 = ($depart->depart_frais * $nbre_ticket); 
-				$facture->facture_timbre_etat 	  	 = $depart->depart_timbre_etat; 
+				$facture->facture_timbre_etat 	  	 = ($depart->depart_timbre_etat * $nbre_ticket); 
 				$facture->facture_commission 	  	 = ($depart->depart_commission * $nbre_ticket); 
-				$facture->facture_montant         	 = ($depart->depart_tarif * $nbre_ticket) + $depart->depart_timbre_etat;
+				$facture->facture_montant         	 = ($depart->depart_tarif * $nbre_ticket);
 				$facture->facture_montant_total   	 = $facture->facture_frais + $facture->facture_montant;
 				$facture->facture_parttelco_in 	  	 = $facture->facture_montant_total * $paramsfrais->paramfrais_tauxtelco_in_wave;
 				$facture->facture_statut_paiement 	 = "IMPAYE";
-				$facture->facture_total_apayer    	 = $facture->facture_montant_total + $facture->facture_parttelco_in;
+				$facture->facture_total_apayer    	 = $facture->facture_montant_total + $facture->facture_parttelco_in + $facture->facture_timbre_etat;
 				$facture->facture_compte_compagnie	 = $facture->facture_montant - $facture->facture_commission;
 				$facture->facture_parttelco_out1  	 = $facture->facture_compte_compagnie * $paramsfrais->paramfrais_tauxtelco_out1_wave;
-				$facture->facture_partpdv 		  	 = $facture->facture_total_apayer * $paramsfrais->paramfrais_tauxpdv;
+				$facture->facture_partpdv 		  	 = $facture->facture_montant_total * $paramsfrais->paramfrais_tauxpdv;
 				$facture->facture_parttelco_out2  	 = $facture->facture_partpdv * $paramsfrais->paramfrais_tauxtelco_out2_wave;
 				$facture->facture_total_tiers_out  	 = $facture->facture_compte_compagnie + $facture->facture_parttelco_out1 + $facture->facture_partpdv + $facture->facture_parttelco_out2;
-				$facture->facture_part_hellodepart 	 = $facture->facture_montant_total - $facture->facture_total_tiers_out;
+				$facture->facture_compteprincipal    = $facture->facture_total_apayer - $facture->facture_parttelco_in;
+				$facture->facture_part_hellodepart 	 = $facture->facture_compteprincipal - $facture->facture_total_tiers_out;
 				$facture->facture_date_creation   	 = gmdate('Y-m-d');
+				
 				$facture->save();
+				
 
 				$facture_id = $facture->facture_id;
 				

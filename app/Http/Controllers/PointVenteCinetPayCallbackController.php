@@ -223,6 +223,10 @@ class PointVenteCinetPayCallbackController extends Controller
 
 	public function pointventenotify(Request $request)
     {
+		
+		$API_KEY 			= '1114703932630f91ed741316.24658063';
+		$SITE_ID 			= '174242';
+		
 		//
 		if(isset($_POST['cpm_trans_id'])) {
 

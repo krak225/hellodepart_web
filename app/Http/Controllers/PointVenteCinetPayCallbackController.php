@@ -223,10 +223,9 @@ class PointVenteCinetPayCallbackController extends Controller
 
 	public function pointventenotify(Request $request)
     {
-		
 		$API_KEY 			= '1114703932630f91ed741316.24658063';
 		$SITE_ID 			= '174242';
-		
+
 		//
 		if(isset($_POST['cpm_trans_id'])) {
 
@@ -297,6 +296,8 @@ class PointVenteCinetPayCallbackController extends Controller
 
 					// On verifie que le montant payé chez CinetPay correspond à notre montant en base de données pour cette transaction
 					if ($code == '00' && $amount == $checkout_session->amount) {
+					// $code=0;
+					// if ($code==0) {//autorisation express pour test
 						// correct, on delivre le service
 						$output = 'Felicitation, votre paiement a été effectué avec succès';
 						echo $output;
@@ -331,6 +332,7 @@ class PointVenteCinetPayCallbackController extends Controller
 								'currency' => $currency,
 								'transaction_id' => $id_transaction,
 								'transaction_date' => gmdate("Y-m-d H:i:s"),
+								'codeembarquement' => Stdfn::truncateN($depart->depart_nbre_ticket_achete, 3),
 								'nom' => $pointvente->nom,
 								'prenoms' => $pointvente->prenoms,
 								'email' => $pointvente->email,

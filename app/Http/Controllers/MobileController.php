@@ -365,7 +365,7 @@ class MobileController extends Controller
 	public function factures(Request $request)
     {
 
-		$factures = Facture::with(['client','user','depart'])->where(['facture_statut_paiement'=>'PAYE'])->orderBy('facture_id')->get();
+		$factures = Facture::with(['client','user','depart.compagnie','depart.gare','depart.ligne'])->where(['facture_statut_paiement'=>'PAYE'])->orderBy('facture_id')->get();
 
 		return $factures;
 
